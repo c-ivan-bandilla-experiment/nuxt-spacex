@@ -1,0 +1,19 @@
+fragment LaunchFields on Launch {
+	id
+	mission_name
+	launch_date_utc
+	details
+}
+
+fragment LaunchSiteFields on LaunchSite {
+	site_id
+	site_name
+	site_name_long
+}
+
+fragment RocketsFields on LaunchRocket {
+	rocket {
+		id
+		name
+	}
+}
