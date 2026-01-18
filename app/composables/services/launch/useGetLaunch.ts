@@ -16,7 +16,7 @@ export function useGetLaunch(customVariables?: MaybeRefOrGetter<GetLaunchesQuery
   const { result, loading, error, refetch } = useQuery(
     GetLaunchesDocument,
     variables,
-    { fetchPolicy: 'network-only' }
+    { fetchPolicy: 'cache-and-network' }
   )
 
   watch(variables, (newVars) => {

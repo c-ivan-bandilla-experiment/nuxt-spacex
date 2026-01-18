@@ -1,5 +1,5 @@
 export function useFilter<T>(
-  data: Ref<T[]>,
+  data: Readonly<Ref<T[]>>,
   filterFn: (item: T, filters: Record<string, any>) => boolean,
   filters: Record<string, Ref<any>>
 ): ComputedRef<T[]> {
