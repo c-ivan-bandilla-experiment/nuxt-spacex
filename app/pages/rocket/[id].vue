@@ -11,6 +11,10 @@
 <script lang="ts" setup>
 import { useGetRocket } from '~/composables/services/rocket/useGetRocket'
 
+definePageMeta({
+	name: 'rocket-show',
+})
+
 const route = useRoute()
-const { rocket, pending, error } = useGetRocket(route.params.id)
+const { rocket, pending, error } = useGetRocket(route.params.id as string)
 </script>
