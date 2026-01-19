@@ -1,0 +1,1 @@
+export type SortOrderOpts = 'asc' | 'desc'

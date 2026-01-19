@@ -1,0 +1,15 @@
+fragment RocketFields on Rocket {
+	name
+	description
+	first_flight
+	height {
+		feet
+	}
+	diameter {
+		feet
+	}
+	mass {
+		lb
+	}
+	stages
+}
