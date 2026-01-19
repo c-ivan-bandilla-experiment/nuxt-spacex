@@ -1,4 +1,5 @@
 {
+	"version": "3.0.0",
 	"private": true,
 	"scripts": {
 		"build": "nuxt build",
@@ -13,15 +14,12 @@
 		"codegen": "graphql-codegen --config codegen.ts",
 		"codegen:watch": "graphql-codegen --config codegen.ts --watch"
 	},
-	"lint-staged": {
-		"**/*": "prettier --write --ignore-unknown --ignore-path .prettierignore",
-		"*.{js,cjs,mjs,ts,jsx,tsx,vue}": "eslint --fix",
-		"*.{css,scss,vue}": "stylelint --fix --ignore-path .gitignore"
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
+	"dependencies": {
+		"@mdi/font": "^7.2.96",
+		"@pinia/nuxt": "^0.5.1",
+		"lodash-es": "^4.17.22",
+		"sass": "^1.68.0",
+		"vuetify": "^3.3.23"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^3.8.0",
@@ -44,12 +42,14 @@
 		"stylelint-config-standard-vue": "^1.0.0",
 		"vite-plugin-vuetify": "^2.0.4"
 	},
-	"dependencies": {
-		"@mdi/font": "^7.2.96",
-		"@pinia/nuxt": "^0.5.1",
-		"lodash-es": "^4.17.22",
-		"sass": "^1.68.0",
-		"vuetify": "^3.3.23"
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+		"*.{js,cjs,mjs,ts,jsx,tsx,vue}": "eslint --fix",
+		"*.{css,scss,vue}": "stylelint --fix --ignore-path .gitignore"
 	},
-	"version": "3.0.0"
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }

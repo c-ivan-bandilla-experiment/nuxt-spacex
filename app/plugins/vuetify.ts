@@ -13,22 +13,22 @@ export default defineNuxtPlugin((nuxtApp) => {
 		theme: {
 			themes: {
 				light: {
-					primary: 'oklch(52% 0.2 250)',      // Blue using OKLCH
-					secondary: 'oklch(30% 0 0)',        // Gray using OKLCH
-					accent: 'oklch(65% 0.25 250)',      // Light blue using OKLCH
-					error: 'oklch(55% 0.22 25)',        // Red using OKLCH
-					info: 'oklch(52% 0.2 250)',         // Blue using OKLCH
-					success: 'oklch(65% 0.15 145)',     // Green using OKLCH
-					warning: 'oklch(85% 0.15 85)',      // Yellow using OKLCH
+					primary: 'oklch(52% 0.2 250)', // Blue using OKLCH
+					secondary: 'oklch(30% 0 0)', // Gray using OKLCH
+					accent: 'oklch(65% 0.25 250)', // Light blue using OKLCH
+					error: 'oklch(55% 0.22 25)', // Red using OKLCH
+					info: 'oklch(52% 0.2 250)', // Blue using OKLCH
+					success: 'oklch(65% 0.15 145)', // Green using OKLCH
+					warning: 'oklch(85% 0.15 85)', // Yellow using OKLCH
 				},
 				dark: {
-					primary: 'oklch(60% 0.2 250)',      // Lighter blue for dark theme
-					secondary: 'oklch(35% 0 0)',        // Lighter gray for dark theme
-					accent: 'oklch(70% 0.25 350)',      // Pink using OKLCH
-					error: 'oklch(60% 0.22 25)',        // Red using OKLCH
-					info: 'oklch(60% 0.2 250)',         // Blue using OKLCH
-					success: 'oklch(70% 0.15 145)',     // Green using OKLCH
-					warning: 'oklch(85% 0.15 85)',      // Yellow using OKLCH
+					primary: 'oklch(60% 0.2 250)', // Lighter blue for dark theme
+					secondary: 'oklch(35% 0 0)', // Lighter gray for dark theme
+					accent: 'oklch(70% 0.25 350)', // Pink using OKLCH
+					error: 'oklch(60% 0.22 25)', // Red using OKLCH
+					info: 'oklch(60% 0.2 250)', // Blue using OKLCH
+					success: 'oklch(70% 0.15 145)', // Green using OKLCH
+					warning: 'oklch(85% 0.15 85)', // Yellow using OKLCH
 				},
 			},
 		},

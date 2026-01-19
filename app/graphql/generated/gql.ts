@@ -15,15 +15,17 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
     "fragment LaunchFields on Launch {\n  id\n  mission_name\n  launch_date_utc\n  details\n}\n\nfragment LaunchSiteFields on LaunchSite {\n  site_id\n  site_name\n  site_name_long\n}\n\nfragment RocketsFields on LaunchRocket {\n  rocket {\n    id\n    name\n  }\n}": typeof types.LaunchFieldsFragmentDoc,
-    "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}": typeof types.RocketFieldsFragmentDoc,
+    "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  height {\n    feet\n  }\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}": typeof types.RocketFieldsFragmentDoc,
     "query GetLaunches($limit: Int, $offset: Int, $find: LaunchFind) {\n  launches(limit: $limit, offset: $offset, find: $find) {\n    ...LaunchFields\n    launch_site {\n      ...LaunchSiteFields\n    }\n    rocket {\n      ...RocketsFields\n    }\n  }\n}": typeof types.GetLaunchesDocument,
     "query GetRocket($rocketId: ID!) {\n  rocket(id: $rocketId) {\n    ...RocketFields\n  }\n}": typeof types.GetRocketDocument,
+    "query GetRockets($limit: Int, $offset: Int) {\n  rockets(limit: $limit, offset: $offset) {\n    id\n    name\n    first_flight\n  }\n}": typeof types.GetRocketsDocument,
 };
 const documents: Documents = {
     "fragment LaunchFields on Launch {\n  id\n  mission_name\n  launch_date_utc\n  details\n}\n\nfragment LaunchSiteFields on LaunchSite {\n  site_id\n  site_name\n  site_name_long\n}\n\nfragment RocketsFields on LaunchRocket {\n  rocket {\n    id\n    name\n  }\n}": types.LaunchFieldsFragmentDoc,
-    "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}": types.RocketFieldsFragmentDoc,
+    "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  height {\n    feet\n  }\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}": types.RocketFieldsFragmentDoc,
     "query GetLaunches($limit: Int, $offset: Int, $find: LaunchFind) {\n  launches(limit: $limit, offset: $offset, find: $find) {\n    ...LaunchFields\n    launch_site {\n      ...LaunchSiteFields\n    }\n    rocket {\n      ...RocketsFields\n    }\n  }\n}": types.GetLaunchesDocument,
     "query GetRocket($rocketId: ID!) {\n  rocket(id: $rocketId) {\n    ...RocketFields\n  }\n}": types.GetRocketDocument,
+    "query GetRockets($limit: Int, $offset: Int) {\n  rockets(limit: $limit, offset: $offset) {\n    id\n    name\n    first_flight\n  }\n}": types.GetRocketsDocument,
 };
 
 /**
@@ -47,7 +49,7 @@ export function graphql(source: "fragment LaunchFields on Launch {\n  id\n  miss
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}"): (typeof documents)["fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}"];
+export function graphql(source: "fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  height {\n    feet\n  }\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}"): (typeof documents)["fragment RocketFields on Rocket {\n  name\n  description\n  first_flight\n  height {\n    feet\n  }\n  diameter {\n    feet\n  }\n  mass {\n    lb\n  }\n  stages\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -56,6 +58,10 @@ export function graphql(source: "query GetLaunches($limit: Int, $offset: Int, $f
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetRocket($rocketId: ID!) {\n  rocket(id: $rocketId) {\n    ...RocketFields\n  }\n}"): (typeof documents)["query GetRocket($rocketId: ID!) {\n  rocket(id: $rocketId) {\n    ...RocketFields\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetRockets($limit: Int, $offset: Int) {\n  rockets(limit: $limit, offset: $offset) {\n    id\n    name\n    first_flight\n  }\n}"): (typeof documents)["query GetRockets($limit: Int, $offset: Int) {\n  rockets(limit: $limit, offset: $offset) {\n    id\n    name\n    first_flight\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

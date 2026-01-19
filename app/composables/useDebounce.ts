@@ -1,15 +1,29 @@
 import { debounce } from 'lodash-es'
 
-export function useDebounce<T>(value: Ref<T>, delay: number): ComputedRef<T> {
-  const debouncedValue = ref<T>(value.value)
+type UseDebounceReturn<T> = {
+	debouncedValue: ComputedRef<T>
+	isDebouncing: ComputedRef<boolean>
+}
 
-  const debouncedSetter = debounce((newValue: T) => {
-    debouncedValue.value = newValue
-  }, delay, { leading: false, trailing: true })
+export function useDebounce<T>(value: Ref<T>, delay: number): UseDebounceReturn<T> {
+	const debouncedValue = ref<T>(value.value)
 
-  watch(value, (newValue) => {
-    debouncedSetter(newValue)
-  })
+	const debouncedSetter = debounce(
+		(newValue: T) => {
+			debouncedValue.value = newValue
+		},
+		delay,
+		{ leading: false, trailing: true },
+	)
 
-  return computed(() => debouncedValue.value)
+	watch(value, (newValue) => {
+		debouncedSetter(newValue)
+	})
+
+	const isDebouncing = computed(() => value.value !== debouncedValue.value)
+
+	return {
+		debouncedValue: computed(() => debouncedValue.value),
+		isDebouncing,
+	}
 }
