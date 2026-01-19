@@ -6,6 +6,10 @@ export default defineNuxtConfig({
 	build: { transpile: ['vuetify'] },
 	imports: { dirs: ['./stores'] },
 
+	nitro: {
+		preset: 'vercel',
+	},
+
 	apollo: {
 		autoImports: true,
 		proxyCookies: true,
