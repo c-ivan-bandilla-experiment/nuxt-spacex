@@ -85,9 +85,17 @@
 import { useGetRocket } from '~/composables/services/rocket/useGetRocket'
 import { useFavoritesStore } from '~/stores/useFavoritesStore'
 import { useTextOverflow } from '~/composables/ui/useTextOverflow'
+import { GetRocketDocument } from '~/graphql/generated/graphql'
 
 definePageMeta({
 	name: 'rocket-show',
+	middleware: ['validate-resource'],
+	resourceValidation: {
+		document: GetRocketDocument,
+		getVariables: (params) => ({ rocketId: params.id }),
+		isValid: (data) => Boolean(data?.rocket),
+		errorMessage: 'Rocket not found',
+	},
 })
 
 const route = useRoute()
