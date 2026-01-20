@@ -35,9 +35,16 @@
 				</div>
 			</hgroup>
 
-			<p class="text-h4 text-pretty" style="text-wrap: pretty">
-				{{ rocket?.description }}
-			</p>
+			<div class="description-wrapper">
+				<input type="checkbox" id="description-toggle" class="description-toggle" />
+				<p ref="descriptionRef" class="text-h5 text-pretty rocket-description">
+					{{ rocket?.description }}
+				</p>
+				<label v-if="isDescriptionClamped" for="description-toggle" class="toggle-label">
+					<span class="see-more">See more</span>
+					<span class="see-less">See less</span>
+				</label>
+			</div>
 
 			<div class="stats-container mt-10 ml-n2 mr-n2">
 				<div class="stat-item">
@@ -77,6 +84,7 @@
 <script lang="ts" setup>
 import { useGetRocket } from '~/composables/services/rocket/useGetRocket'
 import { useFavoritesStore } from '~/stores/useFavoritesStore'
+import { useTextOverflow } from '~/composables/ui/useTextOverflow'
 
 definePageMeta({
 	name: 'rocket-show',
@@ -105,9 +113,81 @@ const formatMass = (massLb: number | undefined) => {
 	}
 	return `${massLb.toLocaleString()} lb`
 }
+
+// Text overflow detection for see more/less toggle
+const {
+	elementRef: descriptionRef,
+	isOverflowing: isDescriptionClamped,
+} = useTextOverflow(() => rocket.value?.description, { lineClamp: 4 })
 </script>
 
 <style scoped>
+/* Description toggle - See more/less */
+.description-wrapper {
+	position: relative;
+}
+
+.description-toggle {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.rocket-description {
+	text-wrap: pretty;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+/* Expanded state */
+.description-toggle:checked~.rocket-description {
+	-webkit-line-clamp: unset;
+	display: block;
+}
+
+/* Toggle label styling */
+.toggle-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	margin-top: 0.5rem;
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: rgb(var(--v-theme-primary));
+	opacity: 0.85;
+	transition: opacity 0.2s ease;
+}
+
+.toggle-label:hover {
+	opacity: 1;
+}
+
+.toggle-label::after {
+	content: '↓';
+	transition: transform 0.3s ease;
+}
+
+/* Toggle text visibility */
+.see-less {
+	display: none;
+}
+
+.description-toggle:checked~.toggle-label .see-more {
+	display: none;
+}
+
+.description-toggle:checked~.toggle-label .see-less {
+	display: inline;
+}
+
+.description-toggle:checked~.toggle-label::after {
+	content: '↑';
+}
+
 .title-wrapper {
 	position: relative;
 	width: 100%;
