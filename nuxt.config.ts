@@ -1,4 +1,5 @@
 import vuetify from 'vite-plugin-vuetify'
+import viteCompression from 'vite-plugin-compression'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
@@ -22,7 +23,20 @@ export default defineNuxtConfig({
 		optimizeDeps: {
 			include: ['graphql-tag'],
 		},
-		plugins: [vuetify()],
+		plugins: [
+			vuetify(),
+			viteCompression({
+				algorithm: 'brotliCompress',
+			}),
+		],
+		vue: {
+			template: {
+				compilerOptions: {
+					// Treat base-select elements as native custom elements
+					isCustomElement: (tag) => ['selectedoption'].includes(tag),
+				},
+			},
+		},
 	},
 
 	modules: ['@nuxtjs/apollo', ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }]],

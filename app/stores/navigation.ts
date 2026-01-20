@@ -38,13 +38,24 @@ export const useNavigationStore = defineStore('navigation', {
 		pop() {
 			const popped = this.stack.pop()
 			if (popped) {
-				const key = popped.path + JSON.stringify(popped.params) + JSON.stringify(popped.query)
+				// Reconstruct the fullPath key used in push()
+				let key = popped.path
+				const queryString = Object.keys(popped.query).length
+					? '?' + new URLSearchParams(popped.query as Record<string, string>).toString()
+					: ''
+				key += queryString
 				delete this.map[key]
 			}
 			return popped
 		},
+		peek() {
+			return this.stack.length > 1 ? this.stack[this.stack.length - 2] : null
+		},
 		async back(router: Router) {
-			const prev = this.pop()
+			// Pop current page first
+			this.pop()
+			// Get the previous page (now at top of stack)
+			const prev = this.stack[this.stack.length - 1]
 			if (!prev) {
 				router.back()
 				return

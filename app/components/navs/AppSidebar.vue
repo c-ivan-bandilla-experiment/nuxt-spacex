@@ -25,5 +25,12 @@ const rail = ref(true)
 <style scoped>
 .v-navigation-drawer {
     border-right: 1px solid rgba(128, 128, 128, 0.2);
+    position: fixed !important;
+    height: 100vh !important;
+    top: 0 !important;
+}
+
+nav.v-navigation-drawer {
+    z-index: 1000 !important;
 }
 </style>
