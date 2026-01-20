@@ -3,6 +3,7 @@ import viteCompression from 'vite-plugin-compression'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+	ssr: false,
 	future: { compatibilityVersion: 4 },
 	build: { transpile: ['vuetify'] },
 	imports: { dirs: ['./stores'] },

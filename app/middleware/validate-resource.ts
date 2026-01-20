@@ -18,6 +18,8 @@ declare module '#app' {
 }
 
 export default defineNuxtRouteMiddleware(async (to) => {
+    if (import.meta.server) return
+
     const validation = to.meta.resourceValidation as ResourceValidation | undefined
 
     if (!validation) return

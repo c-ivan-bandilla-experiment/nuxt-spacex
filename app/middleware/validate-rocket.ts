@@ -1,6 +1,7 @@
 import { GetRocketDocument } from '~/graphql/generated/graphql'
 
 export default defineNuxtRouteMiddleware(async (to) => {
+    if (import.meta.server) return
     if (!to.params.id) return
 
     const rocketId = to.params.id as string
