@@ -23,6 +23,14 @@ export default defineNuxtConfig({
 			include: ['graphql-tag'],
 		},
 		plugins: [vuetify()],
+		vue: {
+			template: {
+				compilerOptions: {
+					// Treat base-select elements as native custom elements
+					isCustomElement: (tag) => ['selectedoption'].includes(tag),
+				},
+			},
+		},
 	},
 
 	modules: ['@nuxtjs/apollo', ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }]],

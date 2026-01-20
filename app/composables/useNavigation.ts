@@ -11,6 +11,7 @@ export function useNavigation() {
 	const route = useRoute()
 	const navStore = useNavigationStore()
 
+	// Restore state from sessionStorage on mount (for page refreshes)
 	if (typeof onMounted === 'function') {
 		onMounted(() => {
 			if (process.client) {
@@ -41,10 +42,6 @@ export function useNavigation() {
 
 	watch(() => navStore.stack, saveToStorage, { deep: true })
 	watch(() => navStore.map, saveToStorage, { deep: true })
-
-	const pushState = (extras: Record<string, any> = {}) => {
-		navStore.push(route as RouteLocationNormalized, extras)
-	}
 
 	const saveScroll = (y: number) => {
 		navStore.saveScroll(route.fullPath, y)
@@ -86,7 +83,6 @@ export function useNavigation() {
 	}
 
 	return {
-		pushState,
 		saveScroll,
 		updateExtras,
 		getSavedState,
